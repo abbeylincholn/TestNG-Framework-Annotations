@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Sample Suite">
+    <listeners>
+        <listener class-name="org.testng.reporters.EmailableReporter"></listener>
+        <listener class-name="org.testng.reporters.FailedReporter"></listener>
+        <listener class-name="org.testng.reporters.TestHTMLReporter"></listener>
+    </listeners>
+
+    <test name="TestNG Framework">
+        <parameter name="username" value="admin"/>
+        <parameter name="password" value="admin123"/>
+<!--        <parameter name="passwordFake" value="admin1237556556565"/>-->
+        <classes>
+            <class name="LoginTest"/>
+            <class name="SearchTest"/>
+        </classes>
+    </test>
+
+</suite>
+
