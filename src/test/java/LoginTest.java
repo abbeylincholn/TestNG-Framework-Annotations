@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class LoginTest extends BaseTest{
     @DataProvider (name = "dataInvalidCredentials")
     public Object[][] dpMethod(){
-        return new Object[][] {{"Admin","test2344"}, {"TestUser","test"}};
+        return new Object[][] {{"Admin","test2344"}, {"TestUser","test"}, {"admin", "admin123"}};
     }
 
     @Test(dataProvider = "dataInvalidCredentials", groups = {"tobi"})
@@ -25,22 +25,9 @@ public class LoginTest extends BaseTest{
         Assert.assertTrue(invalidCredentialsElement.isDisplayed(), "Invalid Credentials message is not displayed");
     }
 
-    @DataProvider (name = "dataValidCredentials")
-    public Object[][] dpMethod2(){
-        return new Object[][] {{"Admin","admin123"}};
-    }
 
-    @Test(dataProvider = "dataValidCredentials", groups = {"tobi"})
-    public void testDP2(String name, String pwd){
-        driver.findElement(By.xpath("//input[@name='username']")).sendKeys(name);
-        driver.findElement(By.xpath("//input[@name='password']")).sendKeys(pwd);
-        driver.findElement(By.xpath("//button")).click();
-        WebElement dashboardElement = waitForElement("//h6[text()='Dashboard']");
-        Assert.assertTrue(dashboardElement.isDisplayed(),"Login successful");
 
-    }
 
-/*
     @Test(groups = {"login"} )
     public void invalidCredentialsTest() {
 
@@ -64,17 +51,13 @@ public class LoginTest extends BaseTest{
 
         Assert.assertTrue(dashboardElement.isDisplayed(),"Login failed");
     }
-*/
+
 
     @Test
             //(groups = {"temp"})
     public void wrongPasswordValidation() {
 
         driver.findElement(By.xpath("//input[@name='username']")).sendKeys("Admin");
-
-//        WebElement optionElement = waitForElement("//input[@name='username']");
-//        optionElement.sendKeys("Admin");
-
         driver.findElement(By.xpath("//input[@name='password']")).sendKeys("admin10");
         driver.findElement(By.xpath("//button")).click();
         WebElement invalidCredentialsElement = waitForElement("//p[text()='Invalid credentials']");
@@ -93,7 +76,22 @@ public class LoginTest extends BaseTest{
         Assert.assertTrue(invalidCredentialsElement.isDisplayed(), "Invalid Credentials message is not displayed");
     }
 
-/*
+    @DataProvider (name = "dataValidCredentials")
+    public Object[][] dpMethod2(){
+        return new Object[][] {{"Admin","admin123"}};
+    }
+
+    @Test(dataProvider = "dataValidCredentials", groups = {"tobi"})
+    public void ztestDP2(String name, String pwd){
+        driver.findElement(By.xpath("//input[@name='username']")).sendKeys(name);
+        driver.findElement(By.xpath("//input[@name='password']")).sendKeys(pwd);
+        driver.findElement(By.xpath("//button")).click();
+        WebElement dashboardElement = waitForElement("//h6[text()='Dashboard']");
+        Assert.assertTrue(dashboardElement.isDisplayed(),"Login successful");
+
+    }
+
+
 
     @Test(groups = {"tempDp"}, dataProvider = "dataInvalidCredentials")
     public void invalidLoginValidation(String username, String password) {
@@ -104,7 +102,7 @@ public class LoginTest extends BaseTest{
         WebElement invalidCredentialsElement = waitForElement("//p[text()='Invalid credentials']");
 
         Assert.assertTrue(invalidCredentialsElement.isDisplayed(), "Invalid Credentials message is not displayed");
-    } */
+    }
 
 }
 
